@@ -1,31 +1,23 @@
 # oop blackjack
 
-
-# going to be OOP
-# card values listed in a dictionary
-# try and have "A" be dynamic and be a 1 or 11 based off of your cards
-
 ## stretch goals ##
 # add a money/betting system
 # ui
-# simulate an actual deck with the right amount of each card
 
 import random
 from random import shuffle
 
-def ranks():
+
+# initializing constants as functions
+def RANKS():
     return ["Ace", "2", "3", "4", "5", "6", "7","8", "9", "10", "Jack", "Queen", "King"]
+        # TODO might need to become a dict anyway to store the value
     
 def SUITS(): 
     return [ "Clubs", "Diamonds", "Hearts", "Spades" ]
 
-# Possibly make a randomly generated list of cards and push them to the "bottom" of the deck
-# TODO check if stacks can be pushed to the back of the stack
-# push -> on stack
-# pop <- off stack
-
-
 class Card:
+    # Each card made with its own rank and suite
 
     def __init__(self, rank, suit):
         self.rank = rank
@@ -36,6 +28,7 @@ class Card:
 
 
 class Deck:
+    # every card is put into a deck and shuffled
 
     def __init__(self):
         self.contents = []
@@ -44,6 +37,30 @@ class Deck:
 
         return self.contents
 
+class Hand:
+
+    def __init__(self):
+        self.hand = []
+
+    def addCard(self, card):
+        self.hand.append(card)
+
+    def getValue(self):
+        value = 0
+        # TODO add up all the cards in the hand
+
+        return value
+
+    def bust(self):
+        # determines if the hand is over 21 and ends the game
+
+    def __str__(self):
+       # a string to print the player or dealers hand
+
+
+class Player:
+
+class Dealer:
 
 class BlackJack:
 
@@ -70,13 +87,9 @@ class BlackJack:
     # def newCard(self):
     #     return random.choice(CARDS.keys())
 
-    def showCards(self):
-
     def dealerAI(self):
         # will the dealer decide to H, S, DD, S
         # Base this off of how high their number is
-
-
 
 
 
@@ -91,6 +104,7 @@ def main():
         if tutorial.lower() == 'y':
             print("The rules are..........")
             print()
+
 
         # deals 2 cards to the player and 2 to the dealer, the dealer having one card face down and one face up
 
