@@ -13,32 +13,37 @@
 import random
 from random import shuffle
 
-CARDS = {
-    "K": 10,
-    "Q": 10,
-    "J": 10,
-    "10":10,
-    "9": 9,
-    "8": 8,
-    "7": 7,
-    "6": 6,
-    "5": 5,
-    "4": 4,
-    "3": 3,
-    "2": 2,
-    "A": 1,
-}
+def ranks():
+    return ["Ace", "2", "3", "4", "5", "6", "7","8", "9", "10", "Jack", "Queen", "King"]
+    
+def SUITS(): 
+    return [ "Clubs", "Diamonds", "Hearts", "Spades" ]
 
 # Possibly make a randomly generated list of cards and push them to the "bottom" of the deck
 # TODO check if stacks can be pushed to the back of the stack
 # push -> on stack
 # pop <- off stack
 
+
+class Card:
+
+    def __init__(self, rank, suit):
+        self.rank = rank
+        self.suit = suit
+
+    def __str__(self):
+        return self.rank + " of " + self.suit
+
+
 class Deck:
-    deck = []
-    for i in range(0, 52):
-        i = random.choice(CARDS.keys())
-        deck.push (i)
+
+    def __init__(self):
+        self.contents = []
+        self.contents = [Card(rank, suit) for rank in RANKS() for suit in SUITS()]
+        random.shuffle(self.contents)
+
+        return self.contents
+
 
 class BlackJack:
 
