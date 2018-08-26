@@ -10,7 +10,21 @@ from random import shuffle
 
 # initializing constants as functions
 def RANKS():
-    return ["Ace", "2", "3", "4", "5", "6", "7","8", "9", "10", "Jack", "Queen", "King"]
+    return [
+    "Ace":1,
+    "2":2,
+    "3":3,
+    "4":4,
+    "5":5,
+    "6":6,
+    "7":7,
+    "8":8,
+    "9":9,
+    "10":10,
+    "Jack":10,
+    "Queen":10,
+    "King":10
+    ]
         # TODO might need to become a dict anyway to store the value
     
 def SUITS(): 
@@ -25,6 +39,7 @@ class Card:
 
     def __str__(self):
         return self.rank + " of " + self.suit
+        # TODO make this work with a dictionary and its keys
 
 
 class Deck:
@@ -62,7 +77,7 @@ class Player:
 
 class Dealer:
 
-class BlackJack:
+class BlackJack: # might need to put all of this in main
 
     def __init_(self):
         self.gameIsPlaying = True 
@@ -70,13 +85,10 @@ class BlackJack:
     def tutorial(self):
         print("Here is how to play Blackjack...")
 
-    def gameStatus(self, playerHand, dealerHand):
-        print("Here are your cards")
-        # TODO show not only the running total of cards, but the cards themselves
-
         print("Here are the dealers cards")
 
 
+    def choice(): # probably needs to be in main
         print("What Would you like to do:")
         print("H - Hit")
         print("S - Stay")
