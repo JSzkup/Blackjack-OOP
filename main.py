@@ -47,11 +47,14 @@ class Deck:
     # every card is put into a deck and shuffled
 
     def __init__(self):
-        self.contents = []
-        self.contents = [Card(rank, suit) for rank in RANKS() for suit in SUITS()]
-        random.shuffle(self.contents)
+        self.cards = []
+        self.cards = [Card(rank, suit) for rank in RANKS() for suit in SUITS()]
+        random.shuffle(self.cards)
 
-        return self.contents
+        return self.cards
+
+    def shuffle(self):
+        random.shuffle(self.cards)
 
 class Hand:
 
@@ -89,7 +92,7 @@ class Player:
 class Dealer:
 
     def ai():
-        
+
 
 class BlackJack: # might need to put all of this in main
 
