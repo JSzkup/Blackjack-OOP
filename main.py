@@ -7,7 +7,6 @@
 import random
 from random import shuffle
 
-
 # initializing constants as functions
 def RANKS():
     return [
@@ -25,7 +24,6 @@ def RANKS():
     "Queen":10,
     "King":10
     ]
-        # TODO might need to become a dict anyway to store the value
     
 def SUITS(): 
     return [ "Clubs", "Diamonds", "Hearts", "Spades" ]
@@ -36,6 +34,9 @@ class Card:
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
+
+    def get_rank(self):
+        return self.rank
 
     def __str__(self):
         return self.rank + " of " + self.suit
@@ -62,31 +63,20 @@ class Hand:
 
     def getValue(self):
         value = 0
-        # TODO add up all the cards in the hand
+        for Card in self.hand:
+            value += RANKS[card.get_rank()]
+            if str(card.get_rank()) == "Ace":
+                if value <= 11:
+                    value += 10
 
         return value
-
-    def bust(self):
-        # determines if the hand is over 21 and ends the game
+        # TODO check for bust hands elsewhere
 
     def __str__(self):
        # a string to print the player or dealers hand
 
 
 class Player:
-
-class Dealer:
-
-class BlackJack: # might need to put all of this in main
-
-    def __init_(self):
-        self.gameIsPlaying = True 
-
-    def tutorial(self):
-        print("Here is how to play Blackjack...")
-
-        print("Here are the dealers cards")
-
 
     def choice(): # probably needs to be in main
         print("What Would you like to do:")
@@ -96,17 +86,18 @@ class BlackJack: # might need to put all of this in main
 
         return choice
 
-    # def newCard(self):
-    #     return random.choice(CARDS.keys())
+class Dealer:
 
-    def dealerAI(self):
-        # will the dealer decide to H, S, DD, S
-        # Base this off of how high their number is
+    def ai():
+        
 
+class BlackJack: # might need to put all of this in main
 
+    def __init_(self):
+        self.gameIsPlaying = True 
 
 ############################
-#Write how the program is going to work here first, with names of functions ill create later
+# Write how the program is going to work here first, with names of functions ill create later
 ############################
 def main():
         # welcome the 
