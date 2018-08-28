@@ -7,9 +7,11 @@
 import random
 from random import shuffle
 
+self.gameIsPlaying = True 
+
 # initializing constants as functions
 def RANKS():
-    return [
+    return {
     "Ace":1,
     "2":2,
     "3":3,
@@ -23,7 +25,7 @@ def RANKS():
     "Jack":10,
     "Queen":10,
     "King":10
-    ]
+    }
     
 def SUITS(): 
     return [ "Clubs", "Diamonds", "Hearts", "Spades" ]
@@ -57,6 +59,7 @@ class Deck:
         random.shuffle(self.cards)
 
 class Hand:
+    # The cards from the deck are pulled from and put into the dealer/players hand
 
     def __init__(self):
         self.hand = []
@@ -80,6 +83,7 @@ class Hand:
 
 
 class Player:
+    # The person playing the game, defines their choices
 
     def choice(): # probably needs to be in main
         print("What Would you like to do:")
@@ -90,14 +94,11 @@ class Player:
         return choice
 
 class Dealer:
+    # The dealers choices for whether or not they'll hit/stay
+    # wont actually be dealing the cards here
 
     def ai():
 
-
-class BlackJack: # might need to put all of this in main
-
-    def __init_(self):
-        self.gameIsPlaying = True 
 
 ############################
 # Write how the program is going to work here first, with names of functions ill create later
