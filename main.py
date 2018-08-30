@@ -6,6 +6,7 @@
 
 import random
 from random import shuffle
+# TODO Import Logs?
 
 self.gameIsPlaying = True 
 
@@ -32,6 +33,7 @@ def SUITS():
 
 class Card:
     # Each card made with its own rank and suite
+    # TODO if usung icons to represent cards take color into account RED/BLACK
 
     def __init__(self, rank, suit):
         self.rank = rank
@@ -78,13 +80,21 @@ class Hand:
         return value
         # TODO check for bust hands elsewhere
 
+        def bust():
+            # Might do this in main()/Player instead
+
     def __str__(self):
+        print(self.hand)
+        print(f"Hand value is {value}")
        # a string to print the player or dealers hand
 
 
 class Player:
     # The person playing the game, defines their choices
 
+    def __init__(self):
+        self.pHand = Hand(hand)
+        
     def choice(): # probably needs to be in main
         print("What Would you like to do:")
         print("H - Hit")
@@ -96,6 +106,9 @@ class Player:
 class Dealer:
     # The dealers choices for whether or not they'll hit/stay
     # wont actually be dealing the cards here
+
+    def __init__(self):
+        self.dHand = Hand(hand)
 
     def ai():
 
@@ -112,6 +125,9 @@ def main():
             print("The rules are..........")
             print()
 
+        for i in range(0, 2):
+            
+
 
         # deals 2 cards to the player and 2 to the dealer, the dealer having one card face down and one face up
 
@@ -124,7 +140,6 @@ if __name__ == "__main__":
     main()
 
 
-# http://ascii.co.uk/art/cards
-# https://en.wikipedia.org/wiki/Playing_cards_in_Unicode
-# https://www.asciiart.eu/miscellaneous/playing-cards
-
+#### https://en.wikipedia.org/wiki/Playing_cards_in_Unicode ####
+# TODO possibly use a json file of all cards to pull from for deck
+# could label each card individually and pull from that using a string == string
