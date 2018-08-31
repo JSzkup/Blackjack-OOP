@@ -47,7 +47,7 @@ class Card:
         # TODO make this work with a dictionary and its keys
 
 
-class Deck:
+class Deck(Card):
     # every card is put into a deck and shuffled
 
     def __init__(self):
@@ -60,7 +60,7 @@ class Deck:
     def shuffle(self):
         random.shuffle(self.cards)
 
-class Hand:
+class Hand(Deck):
     # The cards from the deck are pulled from and put into the dealer/players hand
 
     def __init__(self):
@@ -80,8 +80,10 @@ class Hand:
         return value
         # TODO check for bust hands elsewhere
 
-        def bust():
-            # Might do this in main()/Player instead
+    def bust():
+        
+        return bust
+        # Might do this in main()/Player instead
 
     def __str__(self):
         print(self.hand)
@@ -89,7 +91,7 @@ class Hand:
        # a string to print the player or dealers hand
 
 
-class Player:
+class Player(Hand):
     # The person playing the game, defines their choices
 
     def __init__(self):
@@ -103,7 +105,7 @@ class Player:
 
         return choice
 
-class Dealer:
+class Dealer(Hand):
     # The dealers choices for whether or not they'll hit/stay
     # wont actually be dealing the cards here
 
@@ -117,19 +119,19 @@ class Dealer:
 # Write how the program is going to work here first, with names of functions ill create later
 ############################
 def main():
-        # welcome the 
-        print("Welcome to BlackJack")
-        ## explain basic rules if they dont know how to play
-        tutorial = input("Do you know how to play BlackJack?: ")
-        if tutorial.lower() == 'y':
+    # welcome the player
+    print("Welcome to BlackJack")
+    ## explain basic rules if they dont know how to play
+    tutorial = input("Do you know how to play BlackJack?: ")
+    if tutorial.lower() == 'y':
             print("The rules are..........")
             print()
 
-        for i in range(0, 2):
-            
+    for i in range(0, 2):
+        Hand.addcard(Deck.pop(Card)) # No clue whose deck this goes to           
 
 
-        # deals 2 cards to the player and 2 to the dealer, the dealer having one card face down and one face up
+    # deals 2 cards to the player and 2 to the dealer, the dealer having one card face down and one face up
 
     while self.gameIsPlaying:
         # player decides whether to stand, hit, surrender, double down, or split based off of the total of their current 2 cards
