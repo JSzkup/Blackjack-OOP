@@ -8,7 +8,7 @@ import random
 from random import shuffle
 # TODO Import Logs?
 
-self.gameIsPlaying = True 
+gameIsPlaying = True 
 
 # initializing constants as functions
 def RANKS():
@@ -50,7 +50,7 @@ class Card:
 class Deck(Card):
     # every card is put into a deck and shuffled
 
-    def __init__(self):
+    def __init__(self, cards):
         self.cards = []
         self.cards = [Card(rank, suit) for rank in RANKS() for suit in SUITS()]
         random.shuffle(self.cards)
@@ -63,7 +63,7 @@ class Deck(Card):
 class Hand(Deck):
     # The cards from the deck are pulled from and put into the dealer/players hand
 
-    def __init__(self):
+    def __init__(self, hand):
         self.hand = []
 
     def addCard(self, card):
@@ -94,7 +94,7 @@ class Hand(Deck):
 class Player(Hand):
     # The person playing the game, defines their choices
 
-    def __init__(self):
+    def __init__(self, pHand):
         self.pHand = Hand(hand)
         
     def choice(): # probably needs to be in main
@@ -109,7 +109,7 @@ class Dealer(Hand):
     # The dealers choices for whether or not they'll hit/stay
     # wont actually be dealing the cards here
 
-    def __init__(self):
+    def __init__(self, dHand):
         self.dHand = Hand(hand)
 
     def ai():
