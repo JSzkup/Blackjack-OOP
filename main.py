@@ -55,7 +55,16 @@ class Deck(Card):
         self.cards = [Card(rank, suit) for rank in RANKS() for suit in SUITS()]
         random.shuffle(self.cards)
 
+        # TODO move the deck building to its own function
         return self.cards
+
+    # debugging function
+    def show(self):
+        for c in self.cards:
+            c.show()
+
+    def drawCard(self):
+        return self.cards.pop()
 
     def shuffle(self):
         random.shuffle(self.cards)
@@ -66,8 +75,8 @@ class Hand(Deck):
     def __init__(self, hand):
         self.hand = []
 
-    def addCard(self, card):
-        self.hand.append(card)
+    # def addCard(self, card):
+    #     self.hand.append(card)
 
     def getValue(self):
         value = 0
@@ -78,12 +87,12 @@ class Hand(Deck):
                     value += 10
 
         return value
-        # TODO check for bust hands elsewhere
 
-    def bust():
-        
-        return bust
-        # Might do this in main()/Player instead
+    # TODO check for bust hands
+    #def bust():
+    #    
+    #    return bust
+    #    # Might do this in main()/Player instead
 
     def __str__(self):
         print(self.hand)
@@ -96,14 +105,6 @@ class Player(Hand):
 
     def __init__(self, pHand):
         self.pHand = Hand(hand)
-        
-    def choice(): # probably needs to be in main
-        print("What Would you like to do:")
-        print("H - Hit")
-        print("S - Stay")
-        print()
-
-        return choice
 
 class Dealer(Hand):
     # The dealers choices for whether or not they'll hit/stay
@@ -112,7 +113,8 @@ class Dealer(Hand):
     def __init__(self, dHand):
         self.dHand = Hand(hand)
 
-    def ai():
+    # TODO dealer ai
+    # def ai():
 
 
 ############################
@@ -126,17 +128,19 @@ def main():
     if tutorial.lower() == 'y':
             print("The rules are..........")
             print()
-
-    for i in range(0, 2):
-        Hand.addcard(Deck.pop(Card)) # No clue whose deck this goes to           
-
-
+            
     # deals 2 cards to the player and 2 to the dealer, the dealer having one card face down and one face up
 
     while self.gameIsPlaying:
         # player decides whether to stand, hit, surrender, double down, or split based off of the total of their current 2 cards
         # after the player decides to stay, the dealer then decides whether or not to hit
         # whoever has the higher number in the end wins, if you go over 21 you lose
+
+        print("What Would you like to do:")
+        print("H - Hit")
+        print("S - Stay")
+        print()
+
 
 if __name__ == "__main__":
     main()
