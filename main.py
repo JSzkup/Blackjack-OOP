@@ -52,10 +52,11 @@ class Deck(Card):
 
     def __init__(self, cards):
         self.cards = []
+
+    def buildDeck(self, cards):
         self.cards = [Card(rank, suit) for rank in RANKS() for suit in SUITS()]
         random.shuffle(self.cards)
 
-        # TODO move the deck building to its own function
         return self.cards
 
     # debugging function
@@ -79,14 +80,14 @@ class Hand(Deck):
     #     self.hand.append(card)
 
     def getValue(self):
-        value = 0
-        for Card in self.hand:
-            value += RANKS[card.get_rank()]
+        self.value = 0
+        for card in self.hand:
+            self.value += RANKS[card.get_rank()]
             if str(card.get_rank()) == "Ace":
-                if value <= 11:
-                    value += 10
+                if self.value <= 11:
+                    self.value += 10
 
-        return value
+        return self.value
 
     # TODO check for bust hands
     #def bust():
@@ -96,7 +97,7 @@ class Hand(Deck):
 
     def __str__(self):
         print(self.hand)
-        print(f"Hand value is {value}")
+        print(f"Hand value is {self.value}")
        # a string to print the player or dealers hand
 
 
@@ -128,10 +129,10 @@ def main():
     if tutorial.lower() == 'y':
             print("The rules are..........")
             print()
-            
+
     # deals 2 cards to the player and 2 to the dealer, the dealer having one card face down and one face up
 
-    while self.gameIsPlaying:
+    while gameIsPlaying:
         # player decides whether to stand, hit, surrender, double down, or split based off of the total of their current 2 cards
         # after the player decides to stay, the dealer then decides whether or not to hit
         # whoever has the higher number in the end wins, if you go over 21 you lose
