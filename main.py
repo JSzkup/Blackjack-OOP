@@ -12,26 +12,13 @@ gameIsPlaying = True
 
 # initializing constants as functions
 def RANKS():
-    return {
-    "Ace":1,
-    "2":2,
-    "3":3,
-    "4":4,
-    "5":5,
-    "6":6,
-    "7":7,
-    "8":8,
-    "9":9,
-    "10":10,
-    "Jack":10,
-    "Queen":10,
-    "King":10
-    }
+    return ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
+    # TODO make this a dictionary again one working with strings
     
 def SUITS(): 
     return [ "Clubs", "Diamonds", "Hearts", "Spades" ]
 
-class Card:
+class Card(object):
     # Each card made with its own rank and suite
     # TODO if usung icons to represent cards take color into account RED/BLACK
 
@@ -39,7 +26,7 @@ class Card:
         self.rank = rank
         self.suit = suit
 
-    def get_rank(self):
+    def getRank(self):
         return self.rank
 
     def __str__(self):
@@ -47,13 +34,14 @@ class Card:
         # TODO make this work with a dictionary and its keys
 
 
-class Deck(Card):
+class Deck(object):
     # every card is put into a deck and shuffled
 
     def __init__(self, cards):
         self.cards = []
+        self.build()
 
-    def buildDeck(self, cards):
+    def build(self, cards):
         self.cards = [Card(rank, suit) for rank in RANKS() for suit in SUITS()]
         random.shuffle(self.cards)
 
@@ -70,7 +58,7 @@ class Deck(Card):
     def shuffle(self):
         random.shuffle(self.cards)
 
-class Hand(Deck):
+class Hand(object):
     # The cards from the deck are pulled from and put into the dealer/players hand
 
     def __init__(self, hand):
@@ -89,6 +77,16 @@ class Hand(Deck):
 
         return self.value
 
+    # debugging function
+    def showHand(self):
+        for card in self.hand:
+            card.show()
+
+    def draw(self, deck):
+        self.hand.append(deck.drawCard())
+
+        return self
+
     # TODO check for bust hands
     #def bust():
     #    
@@ -100,23 +98,19 @@ class Hand(Deck):
         print(f"Hand value is {self.value}")
        # a string to print the player or dealers hand
 
+# class Dealer(object):
+#     # The dealers choices for whether or not they'll hit/stay
+#     # wont actually be dealing the cards here
+# 
+#     def __init__(self, dHand):
+#         self.dHand = []
+# 
+#     # TODO dealer ai
+#     # def ai():
 
-class Player(Hand):
-    # The person playing the game, defines their choices
-
-    def __init__(self, pHand):
-        self.pHand = Hand(hand)
-
-class Dealer(Hand):
-    # The dealers choices for whether or not they'll hit/stay
-    # wont actually be dealing the cards here
-
-    def __init__(self, dHand):
-        self.dHand = Hand(hand)
-
-    # TODO dealer ai
-    # def ai():
-
+deck = Deck()
+player = Hand()
+dealer = Hand()
 
 ############################
 # Write how the program is going to work here first, with names of functions ill create later
@@ -125,22 +119,29 @@ def main():
     # welcome the player
     print("Welcome to BlackJack")
     ## explain basic rules if they dont know how to play
-    tutorial = input("Do you know how to play BlackJack?: ")
-    if tutorial.lower() == 'y':
+    tutorial = input("Do you know how to play BlackJack?: (Yes/No)")
+    if tutorial.lower() == 'yes':
             print("The rules are..........")
             print()
 
+    player.draw(deck).draw(deck)
+    dealer.draw(deck).draw(deck)
+    
+    player.showHand()
+    print()
+    dealer.showHand()
+
     # deals 2 cards to the player and 2 to the dealer, the dealer having one card face down and one face up
 
-    while gameIsPlaying:
-        # player decides whether to stand, hit, surrender, double down, or split based off of the total of their current 2 cards
-        # after the player decides to stay, the dealer then decides whether or not to hit
-        # whoever has the higher number in the end wins, if you go over 21 you lose
-
-        print("What Would you like to do:")
-        print("H - Hit")
-        print("S - Stay")
-        print()
+    # while gameIsPlaying:
+    #     # player decides whether to stand, hit, surrender, double down, or split based off of the total of their current 2 cards
+    #     # after the player decides to stay, the dealer then decides whether or not to hit
+    #     # whoever has the higher number in the end wins, if you go over 21 you lose
+ 
+    #     print("What Would you like to do:")
+    #     print("H - Hit")
+    #     print("S - Stay")
+    #     print()
 
 
 if __name__ == "__main__":

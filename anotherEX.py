@@ -11,6 +11,7 @@ class Card(object):
 
 
 class Deck(object):
+    
     def __init__(self):
         self.cards = []
         self.build()
@@ -58,13 +59,15 @@ deck = Deck()
 
 # shuffles the deck and shows the whole hting
 deck.shuffle()
-# deck.show()
+deck.show()
 
 #pulls a card from the deck and shows it
 # card = deck.draw()
 # card.show()
 
+# TODO make a dealer class and also give it it's own Hand
 bob = Player("Bob")
+print()
 bob.draw(deck).draw(deck) # possible because of the "return self"
 bob.showHand()
 
