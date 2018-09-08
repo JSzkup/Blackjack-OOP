@@ -11,12 +11,10 @@ from random import shuffle
 gameIsPlaying = True 
 
 # initializing constants as functions
-def RANKS():
-    return ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
+RANKS = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
     # TODO make this a dictionary again one working with strings
     
-def SUITS(): 
-    return [ "Clubs", "Diamonds", "Hearts", "Spades" ]
+SUITS = ("Clubs", "Diamonds", "Hearts", "Spades")
 
 class Card(object):
     # Each card made with its own rank and suite
@@ -25,27 +23,38 @@ class Card(object):
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
+        self.hidden = False
 
     def getRank(self):
         return self.rank
 
+    def getSuite(self):
+        return self.suit
+
+    def hide_card(self):
+        self.hidden = True
+
+    def reveal_card(self):
+        self.hidden = False    
+
+    # debugging function
+    def show(self):
+        print(f"{self.rank} of {self.suit}")
+
     def __str__(self):
-        return self.rank + " of " + self.suit
+        if self.hidden:
+            return "[X]"
+        else:
+            return self.rank + " of " + self.suit
         # TODO make this work with a dictionary and its keys
 
 
 class Deck(object):
     # every card is put into a deck and shuffled
 
-    def __init__(self, cards):
-        self.cards = []
-        self.build()
-
-    def build(self, cards):
-        self.cards = [Card(rank, suit) for rank in RANKS() for suit in SUITS()]
+    def __init__(self):
+        self.cards = [Card(rank, suit) for rank in RANKS for suit in SUITS]
         random.shuffle(self.cards)
-
-        return self.cards
 
     # debugging function
     def show(self):
@@ -61,7 +70,7 @@ class Deck(object):
 class Hand(object):
     # The cards from the deck are pulled from and put into the dealer/players hand
 
-    def __init__(self, hand):
+    def __init__(self):
         self.hand = []
 
     # def addCard(self, card):
