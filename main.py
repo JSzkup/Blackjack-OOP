@@ -11,8 +11,8 @@ from random import shuffle
 gameIsPlaying = True 
 
 # initializing constants as functions
-RANKS = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
-    # TODO make this a dictionary again one working with strings
+RANKS = { "Ace":1, "2":2, "3":3, "4":4, "5":5, "6":6, 
+"7":7, "8":8, "9":9, "10":10, "Jack":10, "Queen":10, "King":10 }
     
 SUITS = ("Clubs", "Diamonds", "Hearts", "Spades")
 
@@ -128,10 +128,11 @@ def main():
     # welcome the player
     print("Welcome to BlackJack")
     ## explain basic rules if they dont know how to play
-    tutorial = input("Do you know how to play BlackJack?: (Yes/No)")
-    if tutorial.lower() == 'yes':
+    tutorial = input("Do you know how to play BlackJack?: (Yes/No)\n")
+    if tutorial.lower() == 'no':
             print("The rules are..........")
             print()
+    print()
 
     player.draw(deck).draw(deck)
     dealer.draw(deck).draw(deck)
