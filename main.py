@@ -8,7 +8,7 @@ import random
 from random import shuffle
 # TODO Import Logs?
 
-gameIsPlaying = True 
+gameIsPlaying = True
 
 # initializing constants as functions
 RANKS = { "Ace":1, "2":2, "3":3, "4":4, "5":5, "6":6, 
@@ -79,10 +79,12 @@ class Hand(object):
     def getValue(self):
         self.value = 0
         for card in self.hand:
-            self.value += RANKS[card.get_rank()]
-            if str(card.get_rank()) == "Ace":
+            self.value += RANKS[card.getRank()]
+            if str(card.getRank()) == "Ace":
                 if self.value <= 11:
                     self.value += 10
+        
+        print(f"Card value totals:  {self.value}")
 
         return self.value
 
@@ -121,9 +123,6 @@ deck = Deck()
 player = Hand()
 dealer = Hand()
 
-############################
-# Write how the program is going to work here first, with names of functions ill create later
-############################
 def main():
     # welcome the player
     print("Welcome to BlackJack")
@@ -134,25 +133,48 @@ def main():
             print()
     print()
 
+    turn = player
     player.draw(deck).draw(deck)
     dealer.draw(deck).draw(deck)
     
+    print("Your full hand is:")
     player.showHand()
+    player.getValue()
     print()
+    print("The dealers hand is:")
     dealer.showHand()
+    dealer.getValue()
 
     # deals 2 cards to the player and 2 to the dealer, the dealer having one card face down and one face up
 
-    # while gameIsPlaying:
-    #     # player decides whether to stand, hit, surrender, double down, or split based off of the total of their current 2 cards
-    #     # after the player decides to stay, the dealer then decides whether or not to hit
-    #     # whoever has the higher number in the end wins, if you go over 21 you lose
- 
-    #     print("What Would you like to do:")
-    #     print("H - Hit")
-    #     print("S - Stay")
-    #     print()
+    while gameIsPlaying:
+        #     # player decides whether to stand, hit, surrender, double down, or split based off of the total of their current 2 cards
+        if turn == player:
+            print()
+            print("What Would you like to do:")
+            print("Hit")
+            print("Stay")
+            print()
 
+            choice = input()
+
+            if choice.lower() == "hit":
+                player.draw(deck)
+            else:
+                turn = dealer
+            
+            print("Your full hand is:")
+            player.showHand()
+
+            player.getValue()
+
+        # if turn == dealer:
+
+
+
+        #     # after the player decides to stay, the dealer then decides whether or not to hit
+        #     # whoever has the higher number in the end wins, if you go over 21 you lose
+ 
 
 if __name__ == "__main__":
     main()
