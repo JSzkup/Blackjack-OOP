@@ -6,7 +6,6 @@
 
 import random
 from random import shuffle
-# TODO Import Logs?
 
 gameIsPlaying = True
 
@@ -46,8 +45,6 @@ class Card(object):
             return "[X]"
         else:
             return self.rank + " of " + self.suit
-        # TODO make this work with a dictionary and its keys
-
 
 class Deck(object):
     # every card is put into a deck and shuffled
@@ -73,9 +70,6 @@ class Hand(object):
     def __init__(self):
         self.hand = []
 
-    # def addCard(self, card):
-    #     self.hand.append(card)
-
     def getValue(self):
         self.value = 0
         for card in self.hand:
@@ -84,7 +78,7 @@ class Hand(object):
                 if self.value <= 11:
                     self.value += 10
         
-        print(f"Card value totals:  {self.value}")
+        print(f"Card value totals: {self.value}") #TODO can't have this show everytime I call getValue / maybe split into showValue()
 
         return self.value
 
@@ -98,27 +92,17 @@ class Hand(object):
 
         return self
 
-    # TODO check for bust hands
-    #def bust():
-    #    
-    #    return bust
-    #    # Might do this in main()/Player instead
+    def bust():
+        if getValue() > 21:
 
+            return bust
+        
     def __str__(self):
+        # a string to print the player or dealers hand
         print(self.hand)
         print(f"Hand value is {self.value}")
-       # a string to print the player or dealers hand
 
-# class Dealer(object):
-#     # The dealers choices for whether or not they'll hit/stay
-#     # wont actually be dealing the cards here
-# 
-#     def __init__(self, dHand):
-#         self.dHand = []
-# 
-#     # TODO dealer ai
-#     # def ai():
-
+# initializing objects
 deck = Deck()
 player = Hand()
 dealer = Hand()
@@ -129,14 +113,19 @@ def main():
     ## explain basic rules if they dont know how to play
     tutorial = input("Do you know how to play BlackJack?: (Yes/No)\n")
     if tutorial.lower() == 'no':
-            print("The rules are..........")
+            print("The goal of the game is to reach a score (=sum of the cards) as high as possible but not more than 21. \n A Blackjack (Ace and a card whose value is 10) beats all other combination of cards.\n If the final sum is higher than the sum of the dealer, the player wins.")
             print()
     print()
 
     turn = player
+    bust = False
+
+    # drawing 2 initial cards for each player
     player.draw(deck).draw(deck)
     dealer.draw(deck).draw(deck)
     
+    # showing the full hands to the player
+    # TODO hide one card of the dealer & dont show their value
     print("Your full hand is:")
     player.showHand()
     player.getValue()
@@ -145,10 +134,8 @@ def main():
     dealer.showHand()
     dealer.getValue()
 
-    # deals 2 cards to the player and 2 to the dealer, the dealer having one card face down and one face up
-
     while gameIsPlaying:
-        #     # player decides whether to stand, hit, surrender, double down, or split based off of the total of their current 2 cards
+        # player decides whether to stand or hit based off of the total of their current 2 cards
         if turn == player:
             print()
             print("What Would you like to do:")
@@ -157,7 +144,8 @@ def main():
             print()
 
             choice = input()
-
+            print()
+            
             if choice.lower() == "hit":
                 player.draw(deck)
             else:
@@ -168,8 +156,31 @@ def main():
 
             player.getValue()
 
-        # if turn == dealer:
+            print()
+            print("The dealer will now play")
+            print()
 
+        # dealer ai
+        # dealer will draw a card if their total value is under 13
+        if turn == dealer:
+            while dealer.getValue() < 21:
+                if dealer.getValue() < 13:
+                    dealer.draw(deck)
+                else:
+                    # dealer will randomly pull a new card anyway (> 13) to keep the game exciting 
+                    wildCard = random.randint(0, 1)
+
+                    if wildCard == 1:
+                        dealer.draw(deck)
+            
+            print("The Dealers hand is:")
+            dealer.showHand()
+            dealer.getValue()
+
+            turn = 0        
+            
+
+            
 
 
         #     # after the player decides to stay, the dealer then decides whether or not to hit
