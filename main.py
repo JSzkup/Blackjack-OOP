@@ -78,9 +78,11 @@ class Hand(object):
                 if self.value <= 11:
                     self.value += 10
         
-        print(f"Card value totals: {self.value}") #TODO can't have this show everytime I call getValue / maybe split into showValue()
-
         return self.value
+
+    def showValue(self):
+        self.shownVal = self.getValue()
+        print(f"Card value totals: {self.shownVal}")
 
     # debugging function
     def showHand(self):
@@ -129,10 +131,12 @@ def main():
     print("Your full hand is:")
     player.showHand()
     player.getValue()
+    player.showValue()
     print()
     print("The dealers hand is:")
     dealer.showHand()
     dealer.getValue()
+    dealer.showValue()
 
     while gameIsPlaying:
         # player decides whether to stand or hit based off of the total of their current 2 cards
@@ -145,7 +149,7 @@ def main():
 
             choice = input()
             print()
-            
+
             if choice.lower() == "hit":
                 player.draw(deck)
             else:
@@ -153,8 +157,9 @@ def main():
             
             print("Your full hand is:")
             player.showHand()
-
             player.getValue()
+            player.showValue()
+
 
             print()
             print("The dealer will now play")
@@ -167,7 +172,7 @@ def main():
                 if dealer.getValue() < 13:
                     dealer.draw(deck)
                 else:
-                    # dealer will randomly pull a new card anyway (> 13) to keep the game exciting 
+                    # dealer will randomly pull a new card anyway (> 13) so it's not boring
                     wildCard = random.randint(0, 1)
 
                     if wildCard == 1:
@@ -176,6 +181,7 @@ def main():
             print("The Dealers hand is:")
             dealer.showHand()
             dealer.getValue()
+            dealer.showValue()
 
             turn = 0        
             
