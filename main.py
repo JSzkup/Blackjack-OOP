@@ -30,21 +30,12 @@ class Card(object):
     def getSuite(self):
         return self.suit
 
-    def hide_card(self):
-        self.hidden = True
-
-    def reveal_card(self):
-        self.hidden = False    
-
     # debugging function
     def show(self):
         print(f"{self.rank} of {self.suit}")
 
     def __str__(self):
-        if self.hidden:
-            return "[X]"
-        else:
-            return self.rank + " of " + self.suit
+        return self.rank + " of " + self.suit
 
 class Deck(object):
     # every card is put into a deck and shuffled
@@ -96,7 +87,7 @@ class Hand(object):
 
     def bust():
         if getValue() > 21:
-
+            # set gameIsPlaying = False
             return bust
         
     def __str__(self):
@@ -122,9 +113,10 @@ def main():
     turn = player
     bust = False
 
-    # drawing 2 initial cards for each player
+    # drawing 2 initial cards for the player
+    # 1 for the dealer
     player.draw(deck).draw(deck)
-    dealer.draw(deck).draw(deck)
+    dealer.draw(deck)
     
     # showing the full hands to the player
     # TODO hide one card of the dealer & dont show their value
@@ -135,6 +127,7 @@ def main():
     print()
     print("The dealers hand is:")
     dealer.showHand()
+    print("[Hidden Card]")
     dealer.getValue()
     dealer.showValue()
 
@@ -153,7 +146,7 @@ def main():
             if choice.lower() == "hit":
                 player.draw(deck)
             else:
-                turn = dealer
+                turn = dealer # TODO move this
             
             print("Your full hand is:")
             player.showHand()
@@ -186,12 +179,9 @@ def main():
             turn = 0        
             
 
-            
+    # compare the scored and declare winner       
 
 
-        #     # after the player decides to stay, the dealer then decides whether or not to hit
-        #     # whoever has the higher number in the end wins, if you go over 21 you lose
- 
 
 if __name__ == "__main__":
     main()
