@@ -124,12 +124,15 @@ def main():
     player.showHand()
     player.getValue()
     player.showValue()
+
     print()
+    
     print("The dealers hand is:")
     dealer.showHand()
     print("[Hidden Card]")
     dealer.getValue()
-    dealer.showValue()
+    print("Total card value unknown")
+    dealer.draw(deck)
 
     while gameIsPlaying:
         # player decides whether to stand or hit based off of the total of their current 2 cards
