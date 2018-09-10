@@ -7,8 +7,6 @@
 import random
 from random import shuffle
 
-gameIsPlaying = True
-
 # initializing constants as functions
 RANKS = { "Ace":1, "2":2, "3":3, "4":4, "5":5, "6":6, 
 "7":7, "8":8, "9":9, "10":10, "Jack":10, "Queen":10, "King":10 }
@@ -85,10 +83,10 @@ class Hand(object):
 
         return self
 
-    def bust():
-        if getValue() > 21:
-            # set gameIsPlaying = False
-            return bust
+    def bust(self):
+        if self.getValue() > 21:
+
+            return True
         
     def __str__(self):
         # a string to print the player or dealers hand
@@ -101,6 +99,8 @@ player = Hand()
 dealer = Hand()
 
 def main():
+    gameIsPlaying = True
+
     # welcome the player
     print("Welcome to BlackJack")
     ## explain basic rules if they dont know how to play
@@ -111,7 +111,6 @@ def main():
     print()
 
     turn = player
-    bust = False
 
     # drawing 2 initial cards for the player
     # 1 for the dealer
@@ -148,6 +147,9 @@ def main():
 
             if choice.lower() == "hit":
                 player.draw(deck)
+                if player.bust():
+                    print("remove this later: YOU'RE BUST")
+                    gameIsPlaying = False
             else:
                 turn = dealer # TODO move this
             
@@ -156,23 +158,27 @@ def main():
             player.getValue()
             player.showValue()
 
-
-            print()
-            print("The dealer will now play")
-            print()
-
         # dealer ai
         # dealer will draw a card if their total value is under 13
         if turn == dealer:
+            print()
+            print("The dealer will now play")
+            print()
             while dealer.getValue() < 21:
                 if dealer.getValue() < 13:
                     dealer.draw(deck)
+                    if dealer.bust():
+                        print("remove this later: DEALER BUST")
+                        gameIsPlaying = False
                 else:
                     # dealer will randomly pull a new card anyway (> 13) so it's not boring
                     wildCard = random.randint(0, 1)
 
                     if wildCard == 1:
                         dealer.draw(deck)
+                        if dealer.bust():
+                            print("remove this later: DEALER BUST")
+                            gameIsPlaying = False
             
             print("The Dealers hand is:")
             dealer.showHand()
@@ -180,9 +186,11 @@ def main():
             dealer.showValue()
 
             turn = 0        
-            
 
-    # compare the scored and declare winner       
+    print("Game has ended")        
+
+    # TODO comparing scores if no one went bust
+    # TODO        
 
 
 
