@@ -194,8 +194,8 @@ def main():
         print("The player has won!")
     elif player.getValue() < dealer.getValue() and not dealer.bust():
         print("The dealer has won!")
-        else:
-            print("It's a tie!")
+    else:
+        print("It's a tie!") # TODO also goes off if you bust
     
 
     # TODO comparing scores if no one went bust
