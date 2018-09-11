@@ -15,7 +15,6 @@ SUITS = ("Clubs", "Diamonds", "Hearts", "Spades")
 
 class Card(object):
     # Each card made with its own rank and suite
-    # TODO if usung icons to represent cards take color into account RED/BLACK
 
     def __init__(self, rank, suit):
         self.rank = rank
@@ -160,12 +159,12 @@ def main():
 
         # dealer ai
         # dealer will draw a card if their total value is under 13
-        if turn == dealer:
+        if turn == dealer: # TODO possibly change this to else: to reduce variables
             print()
             print("The dealer will now play")
             print()
-            while dealer.getValue() < 21:
-                if dealer.getValue() < 13:
+            while dealer.getValue() < 17:
+                if dealer.getValue() < 11:
                     dealer.draw(deck)
                     if dealer.bust():
                         print("remove this later: DEALER BUST")
@@ -185,12 +184,22 @@ def main():
             dealer.getValue()
             dealer.showValue()
 
-            turn = 0        
+            gameIsPlaying = False        
 
-    print("Game has ended")        
+    print()
+    print("Game has ended")
+    print()
+
+    if player.getValue() > dealer.getValue() and not player.bust():
+        print("The player has won!")
+    elif player.getValue() < dealer.getValue() and not dealer.bust():
+        print("The dealer has won!")
+        else:
+            print("It's a tie!")
+    
 
     # TODO comparing scores if no one went bust
-    # TODO        
+    # TODO test if ACE really does what it's supposed to do      
 
 
 
