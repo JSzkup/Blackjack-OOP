@@ -27,7 +27,6 @@ class Card(object):
     def getSuite(self):
         return self.suit
 
-    # debugging function
     def show(self):
         print(f"{self.rank} of {self.suit}")
 
@@ -41,7 +40,6 @@ class Deck(object):
         self.cards = [Card(rank, suit) for rank in RANKS for suit in SUITS]
         random.shuffle(self.cards)
 
-    # debugging function
     def show(self):
         for c in self.cards:
             c.show()
@@ -72,7 +70,6 @@ class Hand(object):
         self.shownVal = self.getValue()
         print(f"Card value totals: {self.shownVal}")
 
-    # debugging function
     def showHand(self):
         for card in self.hand:
             card.show()
@@ -109,6 +106,7 @@ def main():
             print()
     print()
 
+    # TODO try to remove this without breaking anything
     turn = player
 
     # drawing 2 initial cards for the player
@@ -117,7 +115,6 @@ def main():
     dealer.draw(deck)
     
     # showing the full hands to the player
-    # TODO hide one card of the dealer & dont show their value
     print("Your full hand is:")
     player.showHand()
     player.getValue()
@@ -134,7 +131,9 @@ def main():
 
     while gameIsPlaying:
         # player decides whether to stand or hit based off of the total of their current 2 cards
-        if turn == player:
+        
+        # TODO might be able to break this up into 2 classes to shorten main()
+        if turn == player: 
             print()
             print("What Would you like to do:")
             print("Hit")
@@ -190,15 +189,21 @@ def main():
     print("Game has ended")
     print()
 
-    if player.getValue() > dealer.getValue() and not player.bust():
-        print("The player has won!")
-    elif player.getValue() < dealer.getValue() and not dealer.bust():
-        print("The dealer has won!")
-    else:
-        print("It's a tie!") # TODO also goes off if you bust
-    
+    endPl = player.getValue()
+    endDl = dealer.getValue()
 
-    # TODO comparing scores if no one went bust
+    # displays the winner to the user
+    if player.getValue() > dealer.getValue() and not player.bust():
+        print(f"The player has won with {endPl} points over the dealers {endDl} points!")
+    elif player.getValue() < dealer.getValue() and not dealer.bust():
+        print(f"The dealer has won with {endDl} points over the players {endPl} points!")
+    elif player.getValue() == dealer.getValue() and not dealer.bust() or not player.bust():
+        print(f"It's a tie at {endPl} points.")
+    elif player.bust():
+        print(f"The player is Bust and loses with {endPl} points.")
+    else:
+        print(f"The dealer is Bust and the player wins!")
+    
     # TODO test if ACE really does what it's supposed to do      
 
 
