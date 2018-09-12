@@ -30,9 +30,6 @@ class Card(object):
     def show(self):
         print(f"{self.rank} of {self.suit}")
 
-    def __str__(self):
-        return self.rank + " of " + self.suit
-
 class Deck(object):
     # every card is put into a deck and shuffled
 
@@ -44,6 +41,7 @@ class Deck(object):
         for c in self.cards:
             c.show()
 
+    # takes a card off the top of the deck
     def drawCard(self):
         return self.cards.pop()
 
@@ -56,6 +54,7 @@ class Hand(object):
     def __init__(self):
         self.hand = []
 
+    # iterates through cards and adds the rank of each card to variable "value"
     def getValue(self):
         self.value = 0
         for card in self.hand:
@@ -74,6 +73,7 @@ class Hand(object):
         for card in self.hand:
             card.show()
 
+    # appends the popped card to the player/dealers hand
     def draw(self, deck):
         self.hand.append(deck.drawCard())
 
@@ -83,11 +83,6 @@ class Hand(object):
         if self.getValue() > 21:
 
             return True
-        
-    def __str__(self):
-        # a string to print the player or dealers hand
-        print(self.hand)
-        print(f"Hand value is {self.value}")
 
 # initializing objects
 deck = Deck()
@@ -122,6 +117,7 @@ def main():
 
     print()
     
+    # pretending a card is actually drawn and hidden to reduce computations
     print("The dealers hand is:")
     dealer.showHand()
     print("[Hidden Card]")
@@ -193,18 +189,17 @@ def main():
     endDl = dealer.getValue()
 
     # displays the winner to the user
-    if player.getValue() > dealer.getValue() and not player.bust():
+    if endPl > endDl and not player.bust():
         print(f"The player has won with {endPl} points over the dealers {endDl} points!")
-    elif player.getValue() < dealer.getValue() and not dealer.bust():
+    elif endPl < endDl and not dealer.bust():
         print(f"The dealer has won with {endDl} points over the players {endPl} points!")
-    elif player.getValue() == dealer.getValue() and not dealer.bust() or not player.bust():
-        print(f"It's a tie at {endPl} points.")
-    elif player.bust():
-        print(f"The player is Bust and loses with {endPl} points.")
-    else:
+    elif dealer.bust():
         print(f"The dealer is Bust and the player wins!")
+    elif endPl == endDl and not dealer.bust() or not player.bust():
+        print(f"It's a tie at {endPl} points.")
+    else:
+        print(f"The player is Bust and loses with {endPl} points.")
     
-    # TODO test if ACE really does what it's supposed to do      
 
 
 
@@ -213,5 +208,5 @@ if __name__ == "__main__":
 
 
 #### https://en.wikipedia.org/wiki/Playing_cards_in_Unicode ####
-# TODO possibly use a json file of all cards to pull from for deck
+# TODO test if ACE really does what it's supposed to do      
 # could label each card individually and pull from that using a string == string
