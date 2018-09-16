@@ -19,7 +19,6 @@ class Card(object):
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
-        self.hidden = False
 
     def getRank(self):
         return self.rank
@@ -59,6 +58,7 @@ class Hand(object):
         self.value = 0
         for card in self.hand:
             self.value += RANKS[card.getRank()]
+            # TODO test if ACE really does what it's supposed to do
             if str(card.getRank()) == "Ace":
                 if self.value <= 11:
                     self.value += 10
@@ -207,6 +207,3 @@ if __name__ == "__main__":
     main()
 
 
-#### https://en.wikipedia.org/wiki/Playing_cards_in_Unicode ####
-# TODO test if ACE really does what it's supposed to do      
-# could label each card individually and pull from that using a string == string
