@@ -100,8 +100,7 @@ def main():
             print("The goal of the game is to reach a score (=sum of the cards) as high as possible but not more than 21. \n A Blackjack (Ace and a card whose value is 10) beats all other combination of cards.\n If the final sum is higher than the sum of the dealer, the player wins.")
             print()
     print()
-
-    # TODO try to remove this without breaking anything
+    
     turn = player
 
     # drawing 2 initial cards for the player
@@ -142,7 +141,7 @@ def main():
             if choice.lower() == "hit":
                 player.draw(deck)
                 if player.bust():
-                    print("remove this later: YOU'RE BUST")
+                    print("YOU'RE BUST")
                     gameIsPlaying = False
             else:
                 turn = dealer # TODO move this
@@ -162,7 +161,7 @@ def main():
                 if dealer.getValue() < 11:
                     dealer.draw(deck)
                     if dealer.bust():
-                        print("remove this later: DEALER BUST")
+                        print("DEALER BUST")
                         gameIsPlaying = False
                 else:
                     # dealer will randomly pull a new card anyway (> 13) so it's not boring
@@ -171,7 +170,7 @@ def main():
                     if wildCard == 1:
                         dealer.draw(deck)
                         if dealer.bust():
-                            print("remove this later: DEALER BUST")
+                            print("DEALER BUST")
                             gameIsPlaying = False
             
             print("The Dealers hand is:")
